@@ -33,7 +33,8 @@ int main() {
             }
         }
         int result = max - min + 1 - noNotEqual;
-        cout << result > 0 ? result : 0;
+        result = result > 0 ? result : 0;
+        cout << result;
     }
     return 0;
 }
