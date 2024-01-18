@@ -14,34 +14,26 @@ int main() {
         for (int i = 0; i < n; i++) {
             cin >> a[i];
         }
+
+        vector<int> absDiff(n - 1);
+        partial_sum(a, a + n - 1, absDiff.begin(), [](int x, int y) { return abs(x - y); });
+
         int m;
         cin >> m;
         while (m--) {
             int x, y;
-            int coin = 0;
             cin >> x >> y;
             x--;
             y--;
+
             if (x < y) {
-                for (int i = x; i < y; i++) {
-                    if (i == 0) {
-                        coin += 1;
-                    } else {
-                        coin += abs(a[i] - a[i+1]) < abs(a[i] - a[i-1]) ? 1 : abs(a[i] - a[i+1]);
-                    }
-                }
-            } else if (x == y) {
-                coin = 0;
+                cout << absDiff[y - 1] - (x > 0 ? absDiff[x - 1] : 0) << endl;
+            } else if (x > y) {
+                cout << absDiff[x - 1] - (y > 0 ? absDiff[y - 1] : 0) << endl;
             } else {
-                for (int i = x; i > y; i--) {
-                    if (i == n-1) {
-                        coin += 1;
-                    } else {
-                        coin += abs(a[i] - a[i+1]) > abs(a[i] - a[i-1]) ? 1 : abs(a[i] - a[i-1]);
-                    }
-                }
+                cout << 0 << endl;
             }
-            cout << coin << endl;
         }
     }
+    return 0;
 }
