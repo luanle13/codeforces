@@ -30,12 +30,22 @@ int main() {
         getline(cin, s);
 
         s = " " + s;
-        vector<ll> f(200);
+        vector<ll> f(1e7);
         ll ans = 0;
 
+        f.assign(n + 1, 0);
+
         for (int i = n; i >= 1; i--) {
-            if (s[i] == '1') f[i] = n + 1 - i + (i + 3 <= n ? f[i + 3] : 0);
-            else f[i] = i + 1 <= n ? f[i + 1] : 0;
+            if (s[i] == '1') {
+                ll calc = 0;
+                if (i + 3 <= n) calc = f[i + 3];
+                f[i] = n + 1 - i + calc;
+            }
+            else {
+                ll calc = 0;
+                if (i + 1 <= n) calc = f[i + 1];
+                f[i] = calc;
+            }
             ans += f[i];
         }
 
