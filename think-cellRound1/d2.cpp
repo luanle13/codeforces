@@ -15,6 +15,8 @@
 #define ll long long
 using namespace std;
 
+vector<ll> f(1e6 + 10);
+char s[1000009];
 
 int main() {
     ios_base::sync_with_stdio(false);
@@ -23,14 +25,14 @@ int main() {
     cin >> t;
 
     while (t--) {
-        string s;
         int n;
         cin >> n;
         cin.ignore();
-        getline(cin, s);
 
-        s = " " + s;
-        vector<ll> f(1e7);
+        for (int i = 1; i <= n; i++) {
+            cin >> s[i];
+        }
+
         ll ans = 0;
 
         f.assign(n + 1, 0);
